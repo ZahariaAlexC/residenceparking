@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import serrasolutionsIT.ro.residenceparking.repository.residents.Residents;
+import serrasolutionsIT.ro.residenceparking.repository.securityaccount.SecurityAccount;
 import serrasolutionsIT.ro.residenceparking.service.RegistrationService;
+import serrasolutionsIT.ro.residenceparking.service.SecurityAccountService;
 
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
     private final RegistrationService registrationService;
+    private final SecurityAccountService securityAccountService;
     @GetMapping("/register")
     public ModelAndView register(){
         return new ModelAndView("register");
@@ -27,9 +30,10 @@ public class RegistrationController {
                                      @RequestParam("scale") String scale,
                                      @RequestParam("apartment") String apartment,
                                      @RequestParam("registrationNumber") String registrationNumber) {
-        registrationService.addLocatari(firstName, lastName, username, password,block,scale,apartment, registrationNumber);
+        registrationService.addLocatari(firstName, lastName, username, block,scale,apartment, registrationNumber);
+        securityAccountService.addUserAndPwd(username,password);
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:login.html");
     }
 
     @GetMapping("/info")
@@ -39,8 +43,8 @@ public class RegistrationController {
     }
     @GetMapping("/resident")
     @ResponseBody
-    public Iterable<Residents> takeResidentsByRegistrationNumber(){
-        return registrationService.takeResidentsByRegistrationNumber();
+    public Iterable<Residents> takeResidentsByRegistrationNumber(@RequestParam("registrationNumber") String registrationNumber){
+        return registrationService.takeResidentsByRegistrationNumber(registrationNumber);
     }
 
     @GetMapping("/users")

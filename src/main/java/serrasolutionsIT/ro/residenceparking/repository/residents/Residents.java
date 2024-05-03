@@ -1,6 +1,8 @@
 package serrasolutionsIT.ro.residenceparking.repository.residents;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +12,7 @@ import serrasolutionsIT.ro.residenceparking.repository.residentscars.ResidentsCa
 import serrasolutionsIT.ro.residenceparking.repository.securityaccount.SecurityAccount;
 
 
+import java.security.Security;
 import java.util.Date;
 
 
@@ -32,7 +35,4 @@ public class Residents {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "residentsCars", referencedColumnName = "id")
     private ResidentsCars residentsCars;
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "securityAccount", referencedColumnName = "id")
-    private SecurityAccount securityAccount;
 }
