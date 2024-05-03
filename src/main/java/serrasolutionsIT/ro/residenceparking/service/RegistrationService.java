@@ -1,10 +1,12 @@
 package serrasolutionsIT.ro.residenceparking.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import serrasolutionsIT.ro.residenceparking.repository.residents.Residents;
 import serrasolutionsIT.ro.residenceparking.repository.residents.ResidentsRepo;
 import serrasolutionsIT.ro.residenceparking.repository.residentscars.ResidentsCars;
+import serrasolutionsIT.ro.residenceparking.repository.securityaccount.SecurityAccount;
 
 import java.util.Calendar;
 
@@ -12,15 +14,17 @@ import java.util.Calendar;
 @RequiredArgsConstructor
 public class RegistrationService {
     private final ResidentsRepo residentsRepo;
-    private final Residents residents;
-    private final ResidentsCars residentsCars;
 
-
-    public void addLocatari(String firstName, String lastName, String username, String password, String block, String scale, String apartment, String registrationNumber){
+    @Transactional
+    public void addLocatari(String firstName, String lastName, String username, String password, String block, String scale, String apartment, String registrationNumber) {
+        Residents residents = new Residents();
+        ResidentsCars residentsCars = new ResidentsCars();
+        SecurityAccount securityAccount = new SecurityAccount();
         residents.setFirstName(firstName);
         residents.setLastName(lastName);
         residents.setUsername(username);
-        residents.setPassword(password);
+        securityAccount.setPassword(password);
+        residents.setSecurityAccount(securityAccount);
         residents.setBlock(block);
         residents.setScale(scale);
         residents.setApartment(apartment);
@@ -32,11 +36,15 @@ public class RegistrationService {
         residentsRepo.save(residents);
     }
 
-    public Iterable<Residents> getAll(){
+    public Iterable<Residents> getAll() {
         return residentsRepo.findAll();
     }
 
-    public Iterable<Residents> takeResidentsByRegistrationNumber(){
+    public Iterable<Residents> takeResidentsByRegistrationNumber() {
         return residentsRepo.findAllByRegistrationNumber();
+    }
+
+    public Iterable<Residents> takeUsersFromDB() {
+        return residentsRepo.findUserAndPwd();
     }
 }

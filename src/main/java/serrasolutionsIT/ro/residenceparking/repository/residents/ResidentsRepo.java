@@ -9,8 +9,11 @@ import java.util.List;
 @Repository
 public interface ResidentsRepo extends CrudRepository<Residents, Integer> {
 
-    @Query(value = "select residents.id, first_name, last_name, password, username, block, apartment,scale,residents.date,registration_number,residents_cars from residents inner join residents_cars on residents.id = residents_cars.id where registration_number = 'B25ZAL'",
+    @Query(value = "select residents.id, first_name, last_name, username,password,block, apartment,scale,residents.date,registration_number,residents_cars from residents inner join residents_cars on residents.id = residents_cars.id where registration_number = 'B25ZAL'",
             nativeQuery = true)
     List<Residents> findAllByRegistrationNumber();
+
+    @Query(value = "select * from residents where id = 1", nativeQuery = true)
+    List<Residents> findUserAndPwd();
 
 }

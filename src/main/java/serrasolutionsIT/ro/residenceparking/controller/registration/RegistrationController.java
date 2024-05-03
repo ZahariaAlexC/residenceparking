@@ -1,6 +1,7 @@
 package serrasolutionsIT.ro.residenceparking.controller.registration;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,5 +41,11 @@ public class RegistrationController {
     @ResponseBody
     public Iterable<Residents> takeResidentsByRegistrationNumber(){
         return registrationService.takeResidentsByRegistrationNumber();
+    }
+
+    @GetMapping("/users")
+    @ResponseBody
+    public Iterable<Residents> takeUsers(){
+        return registrationService.takeUsersFromDB();
     }
 }
