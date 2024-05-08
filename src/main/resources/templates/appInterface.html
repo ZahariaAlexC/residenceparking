@@ -33,33 +33,7 @@
         </div>
     </div>
 </nav>
-<br>
-<label>
-    Username Information
-</label>
-<br>
-<br>
-<form th:each="info: ${userInformation}" action = "update-information">
-    <label for="id">User's id:</label>
-    <input type="text" id="id"  th:value="${info.id}" readonly = "readonly">
-    <label for="fname">First Name:</label>
-    <input type="text" id="fname"  th:value="${info.firstName}" readonly = "readonly">
-    <label for="lname">Last Name:</label>
-    <input type="text" id="lname"  th:value="${info.lastName}" readonly = "readonly">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" th:value="${info.username}"><br>
-    <label for="block">Block:</label>
-    <input type="text" id="block"  th:value="${info.block}" readonly = "readonly">
-    <label for="scale">Scale:</label>
-    <input type="text" id="scale"  th:value="${info.scale}" readonly = "readonly">
-    <label for="apartment">Apartment:</label>
-    <input type="text" id="apartment"  th:value="${info.apartment}" readonly = "readonly">
-    <label for="registerPlate">Registration Plate:</label>
-    <input type="text" id="registerPlate" name="registerPlate" th:value="${info.residentsCars.registrationNumber}"><br>
-<br>
-    <div>
-        <button type="submit" class="btn btn-primary">Update Information</button>
-    </div>
-</form>
+    <h6>Quarto Residence</h6>
+    <img th:src="@{QuartoResidence.jpg}" alt="quarto residence">
 </body>
 </html>
