@@ -15,7 +15,6 @@ import java.util.Date;
 @Table(name = "residentsCars")
 @Component
 public class ResidentsCars {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

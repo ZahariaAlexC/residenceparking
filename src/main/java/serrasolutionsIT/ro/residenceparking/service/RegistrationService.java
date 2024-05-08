@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import serrasolutionsIT.ro.residenceparking.repository.residents.Residents;
 import serrasolutionsIT.ro.residenceparking.repository.residents.ResidentsRepo;
 import serrasolutionsIT.ro.residenceparking.repository.residentscars.ResidentsCars;
-import serrasolutionsIT.ro.residenceparking.repository.securityaccount.SecurityAccount;
 
 import java.util.Calendar;
 
@@ -16,15 +15,12 @@ public class RegistrationService {
     private final ResidentsRepo residentsRepo;
 
     @Transactional
-    public void addLocatari(String firstName, String lastName, String username, String password, String block, String scale, String apartment, String registrationNumber) {
+    public void addLocatari(String firstName, String lastName, String username, String block, String scale, String apartment, String registrationNumber) {
         Residents residents = new Residents();
         ResidentsCars residentsCars = new ResidentsCars();
-        SecurityAccount securityAccount = new SecurityAccount();
         residents.setFirstName(firstName);
         residents.setLastName(lastName);
         residents.setUsername(username);
-        securityAccount.setPassword(password);
-        residents.setSecurityAccount(securityAccount);
         residents.setBlock(block);
         residents.setScale(scale);
         residents.setApartment(apartment);
@@ -40,8 +36,8 @@ public class RegistrationService {
         return residentsRepo.findAll();
     }
 
-    public Iterable<Residents> takeResidentsByRegistrationNumber() {
-        return residentsRepo.findAllByRegistrationNumber();
+    public Iterable<Residents> takeResidentsByRegistrationNumber(String registrationNumber) {
+        return residentsRepo.findAllByRegistrationNumber(registrationNumber);
     }
 
     public Iterable<Residents> takeUsersFromDB() {
