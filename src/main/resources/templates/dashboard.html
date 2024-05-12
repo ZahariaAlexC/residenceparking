@@ -1,45 +1,73 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <title>Bootstrap Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body class="p-3 m-0 border-0 bd-example m-0 border-0" style="background-color: #ADD8E6">
-<nav class="navbar" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Dashboard Menu</a>
-        <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggle-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Change Password</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Visitors</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Residential Complex Regulation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">LogOut</a>
-                </li>
-            </ul>
-        </div>
+<!DOCTYPE html>
+<html>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<style>
+
+    img {
+        width: 40%;
+        height: auto;
+    }
+    body {font-family: Arial, Helvetica, sans-serif;}
+
+    .navbar {
+      width: 100%;
+      background-color: #555;
+      overflow: auto;
+    }
+
+    .navbar a {
+      float: left;
+      padding: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background-color: #000;
+    }
+
+    .active {
+      background-color: #04AA6D;
+    }
+
+    @media screen and (max-width: 500px) {
+      .navbar a {
+        float: none;
+        display: block;
+      }
+    }
+
+    /* Full-width inputs */
+        input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 10px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+}
+</style>
+<body style="background-color:#AFDCEC;">
+
+<h2>Parking Residence</h2>
+<div class="navbar">
+    <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-user-shield"></i> Change Password</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Visitors</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Residential Complex Regulation</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Logout</a>
     </div>
-</nav>
+</div>
 <br>
-<label>
-    Username Information
-</label>
-<br>
-<br>
-<form th:each="info: ${userInformation}" action = "update-information">
+
+<div>
+    <img th:src="@{QuartoResidence.jpg}" alt="quarto residence" style="float: right;" width="200" height="100">
+</div>
+
+<form th:each="info: ${userInformation}" action = "update-information" style="float: left;">
     <label for="id">User's id:</label>
     <input type="text" id="id"  th:value="${info.id}" readonly = "readonly">
     <label for="fname">First Name:</label>
@@ -56,7 +84,7 @@
     <input type="text" id="apartment"  th:value="${info.apartment}" readonly = "readonly">
     <label for="registerPlate">Registration Plate:</label>
     <input type="text" id="registerPlate" name="registerPlate" th:value="${info.residentsCars.registrationNumber}"><br>
-<br>
+    <br>
     <div>
         <button type="submit" class="btn btn-primary">Update Information</button>
     </div>
