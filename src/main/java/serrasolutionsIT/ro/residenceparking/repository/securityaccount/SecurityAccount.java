@@ -11,7 +11,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "securityAccount")
-@Component
 public class SecurityAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

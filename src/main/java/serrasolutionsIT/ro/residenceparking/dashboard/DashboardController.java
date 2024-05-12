@@ -26,7 +26,9 @@ public class DashboardController {
     @GetMapping("update-information")
     public ModelAndView loginAction(@RequestParam("username") String username,
                                     @RequestParam("registerPlate") String password) {
-        ModelAndView modelAndView = new ModelAndView("appInterface.html");
+        ModelAndView modelAndView = new ModelAndView("dashboard.html");
+        List<Residents> residentsInformation = userService.returnUserInformation(username);
+        modelAndView.addObject("userInformation", residentsInformation);
         return modelAndView;
     }
 }

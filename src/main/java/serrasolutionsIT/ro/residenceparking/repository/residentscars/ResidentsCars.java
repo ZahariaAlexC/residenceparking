@@ -13,7 +13,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "residentsCars")
-@Component
 public class ResidentsCars {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

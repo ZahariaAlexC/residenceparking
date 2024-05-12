@@ -20,7 +20,6 @@ import java.util.Date;
 @Table(name = "residents")
 @Getter
 @Setter
-@Component
 public class Residents {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
