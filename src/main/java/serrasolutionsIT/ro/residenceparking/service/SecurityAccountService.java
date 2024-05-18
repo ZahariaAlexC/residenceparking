@@ -1,8 +1,6 @@
 package serrasolutionsIT.ro.residenceparking.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import serrasolutionsIT.ro.residenceparking.exceptions.UserException;
@@ -15,7 +13,6 @@ import java.util.Calendar;
 @RequiredArgsConstructor
 public class SecurityAccountService {
 
-    @Autowired
     private final SecurityAccountRepo securityAccountRepo;
 
     @Transactional
@@ -40,5 +37,19 @@ public class SecurityAccountService {
         if (!userFound) {
             throw new UserException("EMAIL/PAROLA INCORECTE");
         }
+    }
+
+    public SecurityAccount userValidation(String username){
+       return securityAccountRepo.checkUserAccount(username).get(0);
+    }
+
+    public void updateUserAccountSecurity(String username, String password, int id){
+        SecurityAccount securityAccount = new SecurityAccount();
+        securityAccount.setUsername(username);
+        securityAccount.setPassword(password);
+        securityAccount.setDate(Calendar.getInstance().getTime());
+
+        securityAccountRepo.updateUserAccountSecurity(username, password, id);
+
     }
 }
