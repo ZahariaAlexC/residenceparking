@@ -14,6 +14,7 @@ import java.util.Calendar;
 public class SecurityAccountService {
 
     private final SecurityAccountRepo securityAccountRepo;
+    private final UserService userService;
 
     @Transactional
     public void addUserAndPwd(String username, String pwd){
@@ -49,7 +50,8 @@ public class SecurityAccountService {
         securityAccount.setPassword(password);
         securityAccount.setDate(Calendar.getInstance().getTime());
 
-        securityAccountRepo.updateUserAccountSecurity(username, password, id);
+
+        securityAccountRepo.updateUserAccountSecurity(username, password, String.valueOf(id));
 
     }
 }

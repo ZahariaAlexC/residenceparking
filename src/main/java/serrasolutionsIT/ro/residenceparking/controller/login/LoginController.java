@@ -32,11 +32,11 @@ public class LoginController {
     public ModelAndView changePassword(@RequestParam("oldpassword") String oldPassword,
                                        @RequestParam("newpassword") String newPassword,
                                        @RequestParam("confirmpassword") String confirmPassword){
-        if(securityAccountService.userValidation(userService.getUsername()).getUsername().equals(userService.getUsername()) &&
-                securityAccountService.userValidation(userService.getUsername()).getPassword().equals(oldPassword) &&
-                newPassword.equals(confirmPassword)){
+//        if(securityAccountService.userValidation(userService.getUsername()).getUsername().equals(userService.getUsername()) &&
+//                securityAccountService.userValidation(userService.getUsername()).getPassword().equals(oldPassword) &&
+//                newPassword.equals(confirmPassword)){
             securityAccountService.updateUserAccountSecurity(userService.getUsername(), newPassword, userService.getId());
-        }
+//        }
         modelAndView = new ModelAndView("dashboard");
         return modelAndView;
     }

@@ -20,7 +20,7 @@ public class UserService {
     private int id;
 
     public List<Residents> returnUserInformation(String username){
-        this.username = residentsRepo.findUserByUsername(username).get(0).getUsername();
+        this.username = username;
         id = residentsRepo.findUserByUsername(username).get(0).getId();
         return residentsRepo.findUserByUsername(username);
     }
