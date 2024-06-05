@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import serrasolutionsIT.ro.residenceparking.exceptions.UserException;
 import serrasolutionsIT.ro.residenceparking.repository.residents.Residents;
-import serrasolutionsIT.ro.residenceparking.security.UserSession;
 import serrasolutionsIT.ro.residenceparking.service.SecurityAccountService;
 import serrasolutionsIT.ro.residenceparking.service.UserService;
 
@@ -16,14 +15,30 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
-
     private ModelAndView modelAndView;
     private final SecurityAccountService securityAccountService;
     private final UserService userService;
 
     @GetMapping("/login")
-    public ModelAndView register(){
+    public ModelAndView login(){
         return new ModelAndView("login");
+    }
+    @GetMapping("/changePassword")
+    public ModelAndView changePassword(){
+        return new ModelAndView("changePassword");
+    }
+
+    @GetMapping("changePassword-action")
+    public ModelAndView changePassword(@RequestParam("oldpassword") String oldPassword,
+                                       @RequestParam("newpassword") String newPassword,
+                                       @RequestParam("confirmpassword") String confirmPassword){
+//        if(securityAccountService.userValidation(userService.getUsername()).getUsername().equals(userService.getUsername()) &&
+//                securityAccountService.userValidation(userService.getUsername()).getPassword().equals(oldPassword) &&
+//                newPassword.equals(confirmPassword)){
+            securityAccountService.updateUserAccountSecurity(userService.getUsername(), newPassword, userService.getId());
+//        }
+        modelAndView = new ModelAndView("dashboard");
+        return modelAndView;
     }
 
     @GetMapping("login-action")
